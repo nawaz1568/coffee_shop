@@ -1,4 +1,3 @@
-// this is from raqshan branch 2nd commit
 
 import React, { useEffect, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
