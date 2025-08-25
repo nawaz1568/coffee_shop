@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FavoritesProvider } from './Screens/FavoritesContext';
+
+
 import BottomTabs from './BottomTabs';
 import BlackScreen from './Screens/Onboardding';
 import LoginPage from './Screens/loginpage';
