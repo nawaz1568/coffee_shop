@@ -1,4 +1,3 @@
-// this is from main branch
 
 import React, { useEffect, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
