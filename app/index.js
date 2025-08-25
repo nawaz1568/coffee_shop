@@ -8,7 +8,6 @@ import BottomTabs from './BottomTabs';
 import BlackScreen from './Screens/Onboardding';
 import LoginPage from './Screens/loginpage';
 import RegisterPage from './Screens/registerpage'; 
-
 import SettingsScreen from './Screens/settingspage';
 import MyAddressPage from './Screens/MyAddressPage';
 import Detail from '../app/Screens/Detailpage';
