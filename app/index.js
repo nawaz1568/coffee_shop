@@ -7,7 +7,7 @@ import { FavoritesProvider } from './Screens/FavoritesContext';
 import BottomTabs from './BottomTabs';
 import BlackScreen from './Screens/Onboardding';
 import LoginPage from './Screens/loginpage';
-import RegisterPage from './Screens/registerpage'; 
+import RegisterPage from './Screens/registerpage';
 import SettingsScreen from './Screens/settingspage';
 import MyAddressPage from './Screens/MyAddressPage';
 import Detail from '../app/Screens/Detailpage';
@@ -21,16 +21,16 @@ import RazorpayPaymentScreen from './Screens/razorpayscreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [initialRoute, setInitialRoute] = useState(null); // will be set after checking storage
+  const [initialRoute, setInitialRoute] = useState(null);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
         const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
         if (isLoggedIn === 'true') {
-          setInitialRoute('BottomTabs');   // if logged in, go to main tabs
+          setInitialRoute('BottomTabs'); 
         } else {
-          setInitialRoute('RegisterPage'); // if not logged in, go to register/login
+          setInitialRoute('RegisterPage'); 
         }
       } catch (error) {
         console.error('Error checking login state:', error);
@@ -42,7 +42,6 @@ export default function App() {
   }, []);
 
   if (!initialRoute) {
-    // still loading login state → show splash/loader
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size="large" color="#C67C4E" />

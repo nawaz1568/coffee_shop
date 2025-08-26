@@ -16,7 +16,9 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig"; 
-import styles from "../styles.js/OrderScreenStyles";  // <-- import styles here
+import { saveUserAddress } from "../firestore_service/users";
+
+import styles from "../styles.js/OrderScreenStyles"; 
 
 export default function OrderScreen() {
   const [user, setUser] = useState({
@@ -136,8 +138,6 @@ export default function OrderScreen() {
           />
           <View style={{ width: 30, height: 30 }} />
         </Appbar.Header>
-
-        {/* Delivery Address */}
         <View style={{ marginTop: 30 }}>
           <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 5 }}>
             Delivery Address
@@ -171,8 +171,6 @@ export default function OrderScreen() {
             </TouchableOpacity>
           ))}
         </View>
-
-        {/* Edit Address Modal */}
         <Modal visible={editModalVisible} transparent animationType="slide">
           <View style={styles.modalOverlay}>
             <View style={styles.modalCard}>
@@ -196,21 +194,27 @@ export default function OrderScreen() {
                 >
                   <Text style={styles.cancelBtnText}>Cancel</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    setUser((prev) => ({ ...prev, address: editedAddress }));
-                    setEditModalVisible(false);
-                  }}
-                  style={styles.saveBtn}
-                >
-                  <Text style={styles.saveBtnText}>Save</Text>
-                </TouchableOpacity>
+               <TouchableOpacity
+  onPress={async () => {
+    try {
+      if (user?.id) {
+        await saveUserAddress(user.id, editedAddress);
+      }
+      setUser((prev) => ({ ...prev, address: editedAddress }));
+      setEditModalVisible(false);
+    } catch (error) {
+      console.log("Error updating address:", error);
+    }
+  }}
+  style={styles.saveBtn}
+>
+  <Text style={styles.saveBtnText}>Save</Text>
+</TouchableOpacity>
+
               </View>
             </View>
           </View>
         </Modal>
-
-        {/* Product Info & Quantity */}
         <View style={styles.productCard}>
           <Image
             source={product?.image_url ? { uri: product.image_url } : require("../../assets/images/coffee.png")}
@@ -244,8 +248,6 @@ export default function OrderScreen() {
         {quantity >= stockQuantity && (
           <Text style={styles.stockWarning}>You have reached the maximum stock for this item.</Text>
         )}
-
-        {/* Discounts */}
         <TouchableOpacity
           onPress={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % discounts.length)}
           style={styles.discountCard}
@@ -267,8 +269,6 @@ export default function OrderScreen() {
             />
           ))}
         </View>
-
-        {/* Payment Summary */}
         <Text style={styles.summaryTitle}>Payment Summary</Text>
         <View style={styles.summaryRow}>
           <Text style={styles.summaryText}>Price {selectedSize ? `(${selectedSize})` : ""}</Text>

@@ -12,8 +12,6 @@ import {
 } from "firebase/firestore";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-// ✅ Delete User
 const deleteUser = async (userId, navigation) => {
   if (!userId || typeof userId !== "string") {
     console.error("Invalid user ID provided:", userId);
@@ -29,8 +27,6 @@ const deleteUser = async (userId, navigation) => {
     throw error;
   }
 };
-
-// ✅ Handle Login
 const handleLogin = async (email, password, navigation, setPasswordError) => {
   if (!password) {
     setPasswordError(true);
@@ -68,7 +64,6 @@ const handleLogin = async (email, password, navigation, setPasswordError) => {
   }
 };
 
-// ✅ Add User
 const addUser = async (data) => {
   try {
     await addDoc(collection(db, "users"), data);
@@ -77,8 +72,6 @@ const addUser = async (data) => {
     console.error("Error adding user: ", error);
   }
 };
-
-// ✅ Get All Users
 const getUsers = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "users"));
@@ -91,8 +84,6 @@ const getUsers = async () => {
     return [];
   }
 };
-
-// ✅ Update User
 const updateUser = async (userId, newData) => {
   try {
     const userRef = doc(db, "users", userId);
@@ -102,10 +93,7 @@ const updateUser = async (userId, newData) => {
     console.error("Error updating user: ", error);
   }
 };
-
-// ✅ Register
 const Register = async (name, email, password, confirmPassword, phone, gender) => {
-  // Basic validation
   if (!name || !email || !password || !confirmPassword || !phone || !gender) {
     Alert.alert("Error", "Please fill all fields.");
     return false;
@@ -128,15 +116,13 @@ const Register = async (name, email, password, confirmPassword, phone, gender) =
     });
 
     Alert.alert("Success", "User data saved successfully!");
-    return true; // indicate success
+    return true; 
   } catch (error) {
     console.error("Error adding user:", error); 
     Alert.alert("Error", error.message);
-    return false; // indicate failure
+    return false; 
   }
 };
-
-// ✅ Save User Address
 const saveUserAddress = async (userId, address) => {
   if (!address) {
     Alert.alert("Error", "Please provide a valid address.");
@@ -146,7 +132,7 @@ const saveUserAddress = async (userId, address) => {
   try {
     const userRef = doc(db, "users", userId);
     await updateDoc(userRef, {
-      address,
+      lastSelectedAddress: address, 
       updated_at: Date.now(),
     });
     console.log("Address saved successfully");
@@ -155,8 +141,6 @@ const saveUserAddress = async (userId, address) => {
     Alert.alert("Error", "Could not save address.");
   }
 };
-
-// ✅ Get User Address
 const getUserAddress = async (userId) => {
   if (!userId) {
     console.error("User ID is missing");

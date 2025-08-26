@@ -9,7 +9,7 @@ const PlusMinusButton = () => {
     <View style={{ alignItems: "center", justifyContent: "center", flex: 1, flexDirection: "row" }}>
       {count > 0 ? (
         <>
-          {/* Minus Button */}
+=
           <TouchableOpacity
             onPress={() => setCount(count - 1)}
             style={{
@@ -21,11 +21,7 @@ const PlusMinusButton = () => {
           >
             <Icon name="remove" size={30} color="black" />
           </TouchableOpacity>
-
-          {/* Value Display */}
           <Text style={{ fontSize: 20, marginHorizontal: 10 }}>{count}</Text>
-
-          {/* Plus Button */}
           <TouchableOpacity
             onPress={() => setCount(count + 1)}
             style={{
@@ -39,7 +35,6 @@ const PlusMinusButton = () => {
           </TouchableOpacity>
         </>
       ) : (
-        // Single Plus Button when count is 0
         <TouchableOpacity
           onPress={() => setCount(1)}
           style={{

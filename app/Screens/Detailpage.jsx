@@ -7,13 +7,11 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../styles.js/detailStyle'
 
 export default function Detail({ route }) {
-  const { product } = route.params || {}; // Get product from route params
-  const defaultSize = product?.sizes?.[0] || 'M'; // Default size is first size
+  const { product } = route.params || {}; 
+  const defaultSize = product?.sizes?.[0] || 'M'; 
   const [selectedSize, setSelectedSize] = useState(defaultSize);
-  const [expanded, setExpanded] = useState(false); // Toggle long description
+  const [expanded, setExpanded] = useState(false);
   const navigation = useNavigation();
-
-  // Extract product details
   const productName = product?.name || 'Unknown Coffee';
   const shortDescription = product?.short_desc || 'No short description available.';
   const longDescription = product?.long_desc || 'No detailed description available.';
@@ -21,22 +19,16 @@ export default function Detail({ route }) {
   const productPrice = product?.priceBySize?.[selectedSize] || '0';
   const productImage = product?.imageUrl
     ? { uri: product.imageUrl }
-    : require('../../assets/images/coffee.png'); // Fallback image
+    : require('../../assets/images/coffee.png'); 
 
   return (
     <ScrollView style={styles.container}>
-      
-      {/* Header */}
       <Appbar.Header style={styles.header}>
         <Appbar.Action icon="chevron-left" size={35} onPress={() => navigation.goBack()} />
         <Appbar.Content title="Detail" style={styles.headerTitle} />
         <Appbar.Action icon="heart-outline" size={28} />
       </Appbar.Header>
-
-      {/* Coffee Image */}
       <Image source={productImage} style={styles.coffeeImage} resizeMode="cover" />
-
-      {/* Product Details */}
       <View style={styles.detailsContainer}>
         <View style={styles.detailsTextContainer}>
           <Text style={styles.coffeeTitle}>{productName}</Text>
@@ -62,8 +54,6 @@ export default function Detail({ route }) {
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* Description Section */}
       <View style={styles.descriptionContainer}>
         <Text style={styles.sectionTitle}>Description</Text>
         <Text style={styles.descriptionText}>
@@ -75,8 +65,6 @@ export default function Detail({ route }) {
           </Text>
         </TouchableOpacity>
       </View>
-
-      {/* Size and Price */}
       <View style={styles.sizeContainer}>
         <Text style={styles.sectionTitle}>Size</Text>
         <View style={styles.sizeButtonsContainer}>
@@ -101,8 +89,6 @@ export default function Detail({ route }) {
           ))}
         </View>
       </View>
-
-      {/* Price and "Buy Now" Button */}
       <View style={styles.priceContainer}>
         <Text style={styles.priceLabel}>Price</Text>
         <View style={styles.priceAndButton}>

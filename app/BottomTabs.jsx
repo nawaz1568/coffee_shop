@@ -4,8 +4,6 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-// Import your screens
 import Itempage from './Screens/Itempage';
 import FavoritesScreen from './Screens/favouritespage';
 import OrderScreen from './Screens/OrderScreen';
@@ -16,12 +14,12 @@ const Tab = createBottomTabNavigator();
 const BottomTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Itempage" // Default tab to show on start
+      initialRouteName="Itempage" 
       screenOptions={{
         tabBarStyle: { height: 55 },
-        tabBarActiveTintColor: '#C67C4E', // Active tab color
-        tabBarInactiveTintColor: 'black', // Inactive tab color
-        tabBarLabelStyle: { fontSize: 12 }, // Optional: Adjust font size
+        tabBarActiveTintColor: '#C67C4E', 
+        tabBarInactiveTintColor: 'black', 
+        tabBarLabelStyle: { fontSize: 12 },
       }}
     >
       <Tab.Screen
@@ -29,7 +27,7 @@ const BottomTabs = () => {
         component={Itempage}
         options={{
           headerShown: false,
-          tabBarLabel: 'Home', // Tab label for Itempage
+          tabBarLabel: 'Home', 
           tabBarIcon: ({ color, size }) => (
             <FontAwesome6 name="house" color={color} size={size} />
           ),
@@ -38,10 +36,10 @@ const BottomTabs = () => {
 
       <Tab.Screen
         name="FavoritesScreen"
-        component={FavoritesScreen} // FavoritesScreen gets the context from FavoritesProvider
+        component={FavoritesScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Favorites', // Tab label for FavoritesScreen
+          tabBarLabel: 'Favorites', 
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="heart-outline" color={color} size={size} />
           ),
@@ -53,7 +51,7 @@ const BottomTabs = () => {
         component={OrderScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Order', // Tab label for OrderScreen
+          tabBarLabel: 'Order',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome5 name="shopping-bag" color={color} size={size} />
           ),
@@ -65,7 +63,7 @@ const BottomTabs = () => {
         component={SettingsScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Settings', // Tab label for SettingsScreen
+          tabBarLabel: 'Settings',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings-outline" color={color} size={size} />
           ),
